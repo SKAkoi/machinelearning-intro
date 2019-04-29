@@ -6,11 +6,17 @@ class myCallBack(tf.keras.callbacks.Callback):
         if(logs.get('loss')<0.1):
             print("Reached desired accuracy. Exiting training...")
             self.model.stop_training = True
-callbacks = myCallBack
+callbacks = myCallBack()
 #load data
 (training_images, training_labels), (test_images, test_labels) = fmnist.load_data()
-#normalize data
-training_images, test_images = training_images/255.0, test_images/255.0
+#reshape training images
+training_images = training_images.reshape(60000, 28, 28, 1)
+#normalize training images
+training_images = training_images/255.0
+#reshape test images
+test_images = test_images.reshape(10000, 28, 28, 1)
+#normalize test images
+test_images = test_images/255.0
 #build the model
 model = tf.keras.models.Sequential([
     #generate 64 filters, each with 3x3 dimension
