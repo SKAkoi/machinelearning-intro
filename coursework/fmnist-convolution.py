@@ -35,12 +35,12 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 #inspect layers of the model
 model.summary()
 #train the model
-model.fit(training_images, training_labels, epochs=5, callbacks=[callbacks])
+model.fit(training_images, training_labels, epochs=10, callbacks=[callbacks])
 test_loss = model.evaluate(test_images, test_labels)
 
 #visualize convolutions
 import matplotlib.pyplot as plt 
-f, axarr = plt.subplot(3,4)
+f, axarr = plt.subplots(3,4)
 FIRST_IMAGE = 0
 SECOND_IMAGE = 7
 THIRD_IMAGE = 26
