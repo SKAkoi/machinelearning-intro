@@ -31,8 +31,8 @@ filter = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
 weight = 1
 
 #create a convolution
-for x in range(1, size_x):
-    for y in range(1, size_y):
+for x in range(1, size_x-1):
+    for y in range(1, size_y-1):
         convolution = 0.0
         convolution = convolution + (i[x-1, y-1]*filter[0][0])
         convolution = convolution + (i[x, y-1]*filter[0][1])
