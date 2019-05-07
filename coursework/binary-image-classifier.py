@@ -30,7 +30,7 @@ print('total validation human images', len(os.listdir(validation_human_dir)))
 #visualize a sample of the pictures
 #matplotlib inline
 import matplotlib.pyplot as plt 
-import matplotlib.images as mpimg
+import matplotlib.image as mpimg
 #parameters for graph to output 4x4 images
 nrows = 4
 ncols = 4
@@ -40,9 +40,9 @@ pic_index = 0
 fig = plt.gcf()
 fig.set_size_inches(ncols % 4, nrows * 4)
 pic_index += 8
-next_horse_pic = [os.path.join(train_horse_dir, fname) for fname in train_horse_name[pic_index-8:pic_index]]
-next_human_pic = [os.path.join(train_human_dir, fname) for fname in train_human_name[pic_index-8:pic_index]]
-for i, img in enumerate(next_horse_pic + next_human_pic):
+next_horse_pic = [os.path.join(train_horse_dir, fname) for fname in train_horse_names[pic_index-8:pic_index]]
+next_human_pic = [os.path.join(train_human_dir, fname) for fname in train_human_names[pic_index-8:pic_index]]
+for i, img_path in enumerate(next_horse_pic + next_human_pic):
     #set up subplot
     sp = plt.subplot(nrows, ncols, i+1)
     sp.axis('off')
@@ -87,7 +87,7 @@ model.compile(loss='binary_crossentropy', optimizer=RMSprop(lr=0.001), metrics=[
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 #rescale images to normalize them
 train_datagen = ImageDataGenerator(rescale=1/255)
-validation_datagen = ImageDataGenerator(resclae=1/255)
+validation_datagen = ImageDataGenerator(rescale=1/255)
 #flow training images in batches of 128 using training data gen
 train_generator = train_datagen.flow_from_directory(
     '/tmp/horse-or-human',
