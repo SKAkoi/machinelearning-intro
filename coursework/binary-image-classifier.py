@@ -1,3 +1,4 @@
+import os
 #Directory with the training horse images
 train_horse_dir = os.path.join('/tmp/horse-or-human/horses')
 
@@ -27,7 +28,7 @@ print('total validation horse images', len(os.listdir(validation_horse_dir)))
 print('total validation human images', len(os.listdir(validation_human_dir)))
 
 #visualize a sample of the pictures
-%matplotlib inline
+#matplotlib inline
 import matplotlib.pyplot as plt 
 import matplotlib.images as mpimg
 #parameters for graph to output 4x4 images
@@ -63,7 +64,7 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.MaxPooling2D(2,2),
     #4th convolution
     tf.keras.layers.Conv2D(64, (3,3), activation='relu'), 
-    tf.keras.layers.MaxPooling2D(2,2)
+    tf.keras.layers.MaxPooling2D(2,2),
     #5th convolution
     tf.keras.layers.Conv2D(64, (3,3), activation='relu'), 
     tf.keras.layers.MaxPooling2D(2,2), 
