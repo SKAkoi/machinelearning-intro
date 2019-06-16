@@ -1,3 +1,17 @@
+#Retrieve training data
+'''
+wget --no-check-certificate \
+    https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip \
+    -O /tmp/horse-or-human.zip
+'''
+#Retrieve validation data
+'''
+wget --no-check-certificate \
+    https://storage.googleapis.com/laurencemoroney-blog.appspot.com/validation-horse-or-human.zip \
+    -O /tmp/validation-horse-or-human.zip
+'''
+
+
 import os
 #Directory with the training horse images
 train_horse_dir = os.path.join('/tmp/horse-or-human/horses')
@@ -98,22 +112,25 @@ train_generator = train_datagen.flow_from_directory(
 validation_generator = validation_datagen.flow_from_directory(
     '/tmp/validation-horse-or-human', 
     target_size=(300,300), 
-    batch_size=128, 
+    batch_size=32, 
     class_mode='binary'
 )
 
 #train the model
 #use model.fit_generator() because of the generators for generating flow
+'''
 history = model.fit_generator(
     train_generator, 
-    steps_per_epoch=8, 
+    steps_per_epoch=16, 
     epochs=15,
     verbose=1, 
     validation_data=validation_generator, 
     validation_steps=8
 )
-
-#run the model
-#upload a file from your file system to get a prediction
+'''
+model.fit(train_generator, steps_per_epoch=16, epochs=15, verbose=1, validation_data=validation_generator, validation_steps=8)
+#clean up
+import signal
+os.kill(os.getpid(), signal.SIGKILL)
 
 
